@@ -49,7 +49,7 @@ git clone git@github.com:niki-amini-naieni/CountVid.git
     ...
   ```
 
-### 3. Install GCC
+### 3.a. Install GCC 
 
 Install GCC. In this project, GCC 11.3 and 11.4 were tested. The following command installs GCC and other development libraries and tools required for compiling software in Ubuntu.
 
@@ -59,6 +59,10 @@ sudo apt install build-essential
 sudo apt install gcc-11 g++-11
 ```
 
+### 3.b. Install CUDA Toolkit:
+
+NOTE: In order to install detectron2 in step 4, you needed to tnstall CUDA Toolkit. Refer to: https://developer.nvidia.com/cuda-downloads
+
 ### 4. Set Up Anaconda Environment:
 
 The following commands will create a suitable Anaconda environment for running CountVid and training CountGD-Box. To produce the results in the paper, we used [Anaconda version 2024.02-1](https://repo.anaconda.com/archive/Anaconda3-2024.02-1-Linux-x86_64.sh).
@@ -66,6 +70,7 @@ The following commands will create a suitable Anaconda environment for running C
 ```
 conda create -n countvid python=3.10
 conda activate countvid
+conda install -c conda-forge gxx_linux-64 compilers libstdcxx-ng # ensure to install required compilers
 cd ..
 git clone https://github.com/facebookresearch/sam2.git && cd sam2
 pip install -e .
@@ -93,7 +98,12 @@ python -m pip install 'git+https://github.com/facebookresearch/detectron2.git'
   python download_bert.py
   ```
 
-* Download the pretrained CountGD-Box model available [here](https://drive.google.com/file/d/1bw-YIS-Il5efGgUqGVisIZ8ekrhhf_FD/view?usp=sharing), and place it in the ```checkpoints``` directory.
+* Download the pretrained CountGD-Box model available [here](https://drive.google.com/file/d/1bw-YIS-Il5efGgUqGVisIZ8ekrhhf_FD/view?usp=sharing), and place it in the ```checkpoints``` directory Or use ```gdown``` to download the weight.
+
+  ```
+  pip install gdown
+  gdown --id 1bw-YIS-Il5efGgUqGVisIZ8ekrhhf_FD -O checkpoints/
+  ```
 
 * Download the pretrained  SAM 2.1 weights.
 
