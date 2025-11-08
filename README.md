@@ -313,11 +313,11 @@ The training code is downloadable [here](https://drive.google.com/file/d/1jLe9OP
 ## Citation
 Please cite our related papers if you build off of our work.
 ```
-@article{AminiNaieni25,
+@InProceedings{AminiNaieni25,
   title={Open-World Object Counting in Videos},
   author={Amini-Naieni, N. and Zisserman, A.},
-  journal={arXiv preprint arXiv:2506.15368},
-  year={2025}
+  booktitle={Association for Advancement of Artificial Intelligence Conference (AAAI)},
+  year={2026}
 }
 
 @InProceedings{AminiNaieni24,
