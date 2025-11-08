@@ -1,4 +1,4 @@
-# CountVid: Open-World Object Counting in Videos
+# [AAAI 2026] CountVid: Open-World Object Counting in Videos
 
 Niki Amini-Naieni & Andrew Zisserman
 
