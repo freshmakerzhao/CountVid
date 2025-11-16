@@ -1,0 +1,11 @@
+test_data
+test_output
+checkpoints/
+__pycache__/
+combined.png
+*.log
+*.tmp
+.DS_Store
+.vscode/
+.idea/
+.env
