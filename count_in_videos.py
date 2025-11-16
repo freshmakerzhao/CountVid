@@ -17,6 +17,8 @@ import shutil
 
 import numpy as np
 import torch
+import matplotlib
+matplotlib.use("Agg")  # 使用非交互后端，禁用弹窗
 import matplotlib.pyplot as plt
 from PIL import Image
 import re
@@ -862,6 +864,9 @@ video_frame_loader = DataLoader(test_video_data, batch_size=args.img_batch_size,
 countgd_pred_boxes = {}
 sam_pred_masks = {}
 start_time_stage_1 = time.time()
+
+print("Total batch:" + str(len(video_frame_loader)))
+
 for idx, (input_frame, input_image_exemplars, exemplars, label) in enumerate(video_frame_loader):
     print("batch idx: " + str(idx))
     # Get box prompts for each frame.
@@ -1065,7 +1070,7 @@ if args.save_countgd_video:
             (x0, y0), box_w, box_h, linewidth=1, edgecolor="r", facecolor="none")
             plt.gca().add_patch(rect)
         plt.axis("off")
-        plt.show()
+        # plt.show()
         plt.savefig(args.output_dir + "/" + f_name)
         plt.close()
         image.close()
@@ -1093,7 +1098,7 @@ if args.save_sam_indep_video:
         cmap = plt.get_cmap("rainbow")
         add_masks_single_image(np.array(image), masks, cmap)
         plt.axis("off")
-        plt.show()
+        # plt.show()
         plt.savefig(args.output_dir + "/" + f_name)
         plt.close()
         image.close()
@@ -1118,7 +1123,7 @@ if args.save_final_video:
         f_name = "final-output-frame-" + str(frame_id) + ".png"
         cmap = plt.get_cmap("rainbow")
         add_masks(frame_id, T, cmap, np.array(image))
-        plt.show()
+        # plt.show() # 由于show在savefig前，放开显示将导致最终的video为白色画布
         plt.savefig(args.output_dir + "/" + f_name)
         plt.close()
         image.close()
@@ -1161,8 +1166,8 @@ if args.save_final_video:
 
         # Place the graph in the bottom of the combined frame
         combined_frame[frame_height:, :, :] = graph_image
-        plt.imshow(combined_frame)
-        plt.savefig("combined.png")
+        # plt.imshow(combined_frame) # debug
+        # plt.savefig("combined.png") # debug
 
         # Write the frame to the output video
         video.write(combined_frame)
@@ -1193,4 +1198,3 @@ if len(args.output_file) > 0:
 
 # Remove the created directory with inference frames.
 shutil.rmtree(args.temp_dir)
-    
